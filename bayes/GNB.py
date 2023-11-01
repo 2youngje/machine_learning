@@ -15,12 +15,12 @@ df_case.append(df['petal width (cm)'])
 
 df_list = list()
 for i in range(len(df_case)*len(df)):
-    df_list.append(df_case[i % 4][df.target == (i // 4)])
+    df_list.append(df_case[i % len(df_case)][df.target == (i // len(df_case))])
 
 minmaxs = list()
 for i in range(len(df_case)):
-    minmaxs.append(df_case[i % 4].min())
-    minmaxs.append(df_case[i % 4].max())
+    minmaxs.append(df_case[i % len(df_case)].min())
+    minmaxs.append(df_case[i % len(df_case)].max())
 
 spaces = list()
 for i in range(len(df_case)):
@@ -36,7 +36,7 @@ def normallization(df, x, dot, n):
     return y
 
 for i in range(len(df_case)*len(df)):
-    y = normallization(df_list[i], spaces[i % 4], df_case[i % 4].iloc[0], i % 4)
-    axes[i % 4].plot(spaces[i % 4], y)
+    y = normallization(df_list[i], spaces[i % len(df_case)], df_case[i % len(df_case)].iloc[0], i % len(df_case))
+    axes[i % len(df_case)].plot(spaces[i % len(df_case)], y)
 
 plt.show()
